@@ -1,4 +1,4 @@
-package ireader.indowebnovel
+package ireader.novelringan
 
 import io.ktor.client.request.post
 import ireader.core.source.Dependencies
@@ -13,7 +13,7 @@ import ireader.core.source.SourceFactory
 import tachiyomix.annotations.Extension
 
 @Extension
-abstract class IndoWebNovel(deps: Dependencies) : SourceFactory(
+abstract class NovelRingan(deps: Dependencies) : SourceFactory(
     deps = deps,
 ) {
     override val lang: String
