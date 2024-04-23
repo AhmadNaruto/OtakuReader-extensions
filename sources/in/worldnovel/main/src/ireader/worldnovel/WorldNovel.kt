@@ -20,8 +20,8 @@ abstract class WorldNovel(deps: Dependencies) : SourceFactory(
         get() = "in"
     override val baseUrl: String
         get() = "https://worldnovel.online"
-    // override val id: Long
-    //    get() = 71
+    override val id: Long
+        get() = 94
     override val name: String
         get() = "WorldNovel"
 

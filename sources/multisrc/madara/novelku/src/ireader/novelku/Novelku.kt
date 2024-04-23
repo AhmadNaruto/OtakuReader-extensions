@@ -11,6 +11,6 @@ abstract class Novelku(val deps: Dependencies) : Madara(
     deps,
     key = "https://novelku.id",
     sourceName = "novelku",
-    sourceId = 79,
+    sourceId = 91,
     language = "in",
 )

@@ -21,7 +21,7 @@ abstract class NovelRingan(deps: Dependencies) : SourceFactory(
     override val baseUrl: String
         get() = "https://novelringan.com"
     override val id: Long
-        get() = 72
+        get() = 92
     override val name: String
         get() = "NovelRingan"
 

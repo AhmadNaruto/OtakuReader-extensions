@@ -21,7 +21,7 @@ abstract class SakuraNovel(deps: Dependencies) : SourceFactory(
     override val baseUrl: String
         get() = "https://sakuranovel.id"
     override val id: Long
-        get() = 73
+        get() = 93
     override val name: String
         get() = "SakuraNovel"
 
