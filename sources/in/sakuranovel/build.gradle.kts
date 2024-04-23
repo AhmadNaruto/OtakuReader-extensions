@@ -1,8 +1,8 @@
 listOf("in").map { lang ->
   Extension(
-    name = "IndoWebNovel",
+    name = "SakuraNovel",
     versionCode = 1,
-    libVersion = "2",
+    libVersion = "1",
     lang = lang,
     description = "",
     nsfw = false,
