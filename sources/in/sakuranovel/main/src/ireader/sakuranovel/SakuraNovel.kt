@@ -1,4 +1,4 @@
-package ireader.novelringan
+package ireader.sakuranovel
 
 import io.ktor.client.request.post
 import ireader.core.source.Dependencies
@@ -13,17 +13,17 @@ import ireader.core.source.SourceFactory
 import tachiyomix.annotations.Extension
 
 @Extension
-abstract class NovelRingan(deps: Dependencies) : SourceFactory(
+abstract class SakuraNovel(deps: Dependencies) : SourceFactory(
     deps = deps,
 ) {
     override val lang: String
-        get() = "in"
+        get() = "en"
     override val baseUrl: String
-        get() = "https://novelringan.com"
+        get() = "https://sakuranovel.id"
     override val id: Long
-        get() = 72
+        get() = 73
     override val name: String
-        get() = "NovelRingan"
+        get() = "SakuraNovel"
 
     override fun getFilters(): FilterList = listOf(
         Filter.Title(),
@@ -40,25 +40,25 @@ abstract class NovelRingan(deps: Dependencies) : SourceFactory(
         get() = listOf(
             BaseExploreFetcher(
                 "Latest",
-                endpoint = "/advanced-search/page/{page}/?title=&status=&order=update",
-                selector = ".listupd article",
-                nameSelector = "h2 a",
-                // nameAtt = "title",
-                linkSelector = "h2 a",
+                endpoint = "/page/{page}/",
+                selector = ".flexbox3 .flexbox3-item",
+                nameSelector = ".title > a",
+                //nameAtt = "title",
+                linkSelector = ".title > a",
                 linkAtt = "href",
-                coverSelector = "img",
+                coverSelector = "flexbox3-thumb > img",
                 coverAtt = "src",
                 maxPage = 10
             ),
             BaseExploreFetcher(
                 "Search",
-                endpoint = "/advanced-search/page/{page}/?title={query}&status=&order=update",
-                selector = ".listupd article",
-                nameSelector = "h2 a",
-                // nameAtt = "title",
-                linkSelector = "h2 a",
+                endpoint = "/page/{page}/?s={query}",
+                selector = ".flexbox2 .flexbox2-item",
+                nameSelector = "flexbox2-content > a",
+                nameAtt = "title",
+                linkSelector = "flexbox2-content > a",
                 linkAtt = "href",
-                coverSelector = "img",
+                coverSelector = "flexbox2-thumb > img",
                 coverAtt = "src",
                 maxPage = 10,
                 type = SourceFactory.Type.Search
@@ -67,17 +67,18 @@ abstract class NovelRingan(deps: Dependencies) : SourceFactory(
 
     override val detailFetcher: Detail
         get() = SourceFactory.Detail(
-            nameSelector = ".maininfo",
-            coverSelector = ".imgprop img",
+            nameSelector = ".series-titlex > h2",
+            coverSelector = ".series-thumb > img",
             coverAtt = "src",
-            descriptionSelector = "span p",
+            descriptionSelector = ".series-synops p",
         )
 
     override val chapterFetcher: Chapters
         get() = SourceFactory.Chapters(
-            selector = ".bxcl ul li",
+            selector = ".series-chapterlist > li 
+            .flexch-infoz",
             nameSelector = "a",
-            // nameAtt = "title",
+            nameAtt = "title",
             linkSelector = "a",
             linkAtt = "href",
             reverseChapterList = true,
@@ -85,8 +86,8 @@ abstract class NovelRingan(deps: Dependencies) : SourceFactory(
 
     override val contentFetcher: Content
         get() = SourceFactory.Content(
-            pageTitleSelector = ".entry-title",
-            pageContentSelector = ".entry-content",
+            pageTitleSelector = ".text-story > h2",
+            pageContentSelector = ".text-story",
         )
 
 }

@@ -1,4 +1,4 @@
-package ireader.novelringan
+package ireader.worldnovel
 
 import io.ktor.client.request.post
 import ireader.core.source.Dependencies
@@ -13,17 +13,17 @@ import ireader.core.source.SourceFactory
 import tachiyomix.annotations.Extension
 
 @Extension
-abstract class NovelRingan(deps: Dependencies) : SourceFactory(
+abstract class WorldNovel(deps: Dependencies) : SourceFactory(
     deps = deps,
 ) {
     override val lang: String
         get() = "in"
     override val baseUrl: String
-        get() = "https://novelringan.com"
-    override val id: Long
-        get() = 72
+        get() = "https://worldnovel.online"
+    // override val id: Long
+    //    get() = 71
     override val name: String
-        get() = "NovelRingan"
+        get() = "WorldNovel"
 
     override fun getFilters(): FilterList = listOf(
         Filter.Title(),
@@ -40,44 +40,33 @@ abstract class NovelRingan(deps: Dependencies) : SourceFactory(
         get() = listOf(
             BaseExploreFetcher(
                 "Latest",
-                endpoint = "/advanced-search/page/{page}/?title=&status=&order=update",
-                selector = ".listupd article",
-                nameSelector = "h2 a",
-                // nameAtt = "title",
-                linkSelector = "h2 a",
+                endpoint = "/find-series/page/{page}/?is_search=true&status=&tahun=&filter_publisher=&filter_cnt=&orderby=date&order=DESC",
+                selector = "div.mb-4 > row > .col-12",
+                nameSelector = ".col-6 > img",
+                nameAtt = "alt",
+                linkSelector = "p.post-title a",
                 linkAtt = "href",
-                coverSelector = "img",
+                coverSelector = ".col-6 > img",
                 coverAtt = "src",
                 maxPage = 10
-            ),
-            BaseExploreFetcher(
-                "Search",
-                endpoint = "/advanced-search/page/{page}/?title={query}&status=&order=update",
-                selector = ".listupd article",
-                nameSelector = "h2 a",
-                // nameAtt = "title",
-                linkSelector = "h2 a",
-                linkAtt = "href",
-                coverSelector = "img",
-                coverAtt = "src",
-                maxPage = 10,
-                type = SourceFactory.Type.Search
             ),
         )
 
     override val detailFetcher: Detail
         get() = SourceFactory.Detail(
-            nameSelector = ".maininfo",
-            coverSelector = ".imgprop img",
+            nameSelector = "li[aria-current=page]",
+            coverSelector = ".d-flex .mb-4 > img",
             coverAtt = "src",
-            descriptionSelector = "span p",
+            authorBookSelector = ".mb-4:contains(Author) li"
+            descriptionSelector = "#maintab div.text-cloud",
         )
-
+        
+// iam strugle with this not implemented
     override val chapterFetcher: Chapters
         get() = SourceFactory.Chapters(
-            selector = ".bxcl ul li",
+            selector = "section div.container",
             nameSelector = "a",
-            // nameAtt = "title",
+            nameAtt = "title",
             linkSelector = "a",
             linkAtt = "href",
             reverseChapterList = true,
@@ -85,8 +74,8 @@ abstract class NovelRingan(deps: Dependencies) : SourceFactory(
 
     override val contentFetcher: Content
         get() = SourceFactory.Content(
-            pageTitleSelector = ".entry-title",
-            pageContentSelector = ".entry-content",
+            pageTitleSelector = "h3.post-title",
+            pageContentSelector = "div.post-content",
         )
 
 }

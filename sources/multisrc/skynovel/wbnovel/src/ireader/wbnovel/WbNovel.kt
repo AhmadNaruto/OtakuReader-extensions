@@ -1,6 +1,7 @@
 package ireader.wbnovel
 
 import ireader.core.source.Dependencies
+import ireader.core.source.model.MangaInfo
 import ireader.skynovelmodel.SkyNovelModel
 import tachiyomix.annotations.Extension
 
@@ -21,9 +22,9 @@ abstract class WbNovel(val deps: Dependencies) : SkyNovelModel(deps,) {
 
     override val mainEndpoint: String
         get() = "all-novel"
-
+        
     override val descriptionSelector: String
-        get() = "summary__content p"
+        get() = ".summary__content"
 
     override val contentSelector: String
         get() = ".reading-content p"

@@ -241,4 +241,15 @@ listOf(
         assetsDir = "multisrc/madara/mtlnovelclub/assets",
         sourceDir = "mtlnovelclub",
     ),
+    Extension(
+        name = "Novelku",
+        versionCode = 1,
+        libVersion = "1",
+        lang = "in",
+        description = "",
+        nsfw = false,
+        icon = DEFAULT_ICON,
+        assetsDir = "multisrc/madara/novelku/assets",
+        sourceDir = "novelku",
+    ),
 ).also(::register)
