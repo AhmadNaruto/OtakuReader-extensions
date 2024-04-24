@@ -9,7 +9,7 @@ listOf(
         icon = DEFAULT_ICON,
         assetsDir = "multisrc/madara/novelku/assets",
         sourceDir = "novelku",
-    ),
+    ), /*
     Extension(
         name = "Neosekaitranslations",
         versionCode = 1,
@@ -251,5 +251,5 @@ listOf(
         icon = DEFAULT_ICON,
         assetsDir = "multisrc/madara/mtlnovelclub/assets",
         sourceDir = "mtlnovelclub",
-    ),
+    ), */
 ).also(::register)
